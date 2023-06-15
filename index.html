@@ -61,6 +61,49 @@
       z-index: 2; /* Ensure the image overlay is above the countdown timer */
     }
 
+    .pop-up{
+      color: #ffc107; /* Change the color to yellow */
+      font-size: 32px; /* Change the font size */
+      font-weight: bold; /* Make the text bold */      
+    }
+    .random-text {
+      position: absolute;
+      top: calc(50% - 20px); /* Adjust the starting position from top */
+      left: calc(50% - 50px); /* Adjust the starting position from left */
+      color: #ffc107; /* Set the text color to yellow */
+      opacity: 0.2; /* Set the opacity to 50% */
+      white-space: nowrap;
+      animation: slide linear infinite;
+      font-weight: light; /* Default font weight */
+      font-style: normal; /* Default font style */
+    }
+    .random-text.font-weight-light {
+      font-weight: lighter;
+    }
+
+    .random-text.font-weight-semi-bold {
+      font-weight: 600;
+    }
+
+    .random-text.font-style-italic {
+      font-style: italic;
+    }
+    .slide-right {
+      animation-direction: alternate; /* Slide alternately from right to left and left to right */
+    }
+    .slide-down {
+      top: calc(-100vh); /* Starting position from top outside the screen */
+      left: calc(50% - 50px); /* Adjust the starting position from left */
+    }
+    @keyframes slide {
+      0% {
+        transform: translateX(100vw);
+      }
+      100% {
+        transform: translateX(-100vw);
+      }
+    }
+
     
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -71,14 +114,30 @@
     <div id="imageOverlay"></div>
     <div id="countdownTitle">27 Juni 2023</div>
     <div class="d-flex justify-content-center">
-      <button id="startButton" class="btn btn-warning fade-button btn-grow custom-btn w-50" style="display: none;" disabled>Öppna</button>
+      <button id="startButton" class="btn btn-warning fade-button btn-grow custom-btn w-50" style="display: none;" disabled data-bs-toggle="modal" data-bs-target="#popupModal">Öppna</button>
     </div>
   </div>
-  
 
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h5 class="modal-title" id="popupModalLabel">Redo för en</h5>
+        </div>
+        <div class="modal-body text-center pop-up">
+          Överraskning
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Countdown timer
-    var countDownDate = new Date().getTime() + 10000; // 1000 = 1 second
+    var countDownDate = new Date().getTime() + 3000; // 1000 = 1 second
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
@@ -103,11 +162,8 @@
     }, 1000);
 
     document.getElementById("startButton").addEventListener("click", function() {
-      //document.getElementById("startButton").style.display = "none";
-      //document.querySelector('.container').style.display = 'none';
-      setTimeout(function() {
-        window.location.href = "raffle.html"; // Replace with the desired page URL
-      }, 1000);
+      // Redirect to the desired page when the button is clicked
+      //window.location.href = "raffle.html"; // Replace with the desired page URL
     });
 
     // Add event listener to increase button size and font weight when clicked
@@ -118,8 +174,99 @@
         myButton.classList.remove("active");
       }, 300);
     });
+ 
+    // Generate and animate random text
+    function generateRandomText() {
+      var texts = [
+        "Emil är bäst",
+        "Grattis!",
+        "50år skojar man inte bort",
+        "Hurra bästa morsa",
+        "Enastående",
+        "Du är bäst!",
+      ];
 
+      var text = texts[Math.floor(Math.random() * texts.length)];
+      var fontSize = Math.floor(Math.random() * 25) + 10 + "px"; // Random font size between 10px and 30px
+      var startingPosition = Math.floor(Math.random() * 100) + "vw"; // Random starting position outside the screen
+      var isSlideRight = Math.random() < 0.5; // Randomly determine slide direction
+      
+      var fontWeight = ['bold', 'normal', 'normal', 'normal']; // Adjust the probabilities of different font weights
+      var fontStyle = ['normal', 'italic', 'normal', 'normal']; // Adjust the probabilities of different font styles
 
+      var randomFontWeight = fontWeight[Math.floor(Math.random() * fontWeight.length)];
+      var randomFontStyle = fontStyle[Math.floor(Math.random() * fontStyle.length)];    
+      
+      var textElement = document.createElement("div");
+      textElement.textContent = text;
+      textElement.classList.add("random-text");
+      textElement.style.fontSize = fontSize;
+      textElement.classList.add("font-weight-" + randomFontWeight);
+      textElement.classList.add("font-style-" + randomFontStyle);
+      textElement.style.top = isSlideRight ? startingPosition : "-100vh";
+      textElement.style.left = isSlideRight ? "calc(50% - 50px)" : startingPosition;
+      textElement.classList.toggle("slide-right", isSlideRight);
+      textElement.classList.toggle("slide-down", !isSlideRight);
+      document.body.appendChild(textElement);
+      animateText(textElement);
+      var isSlideRight = slideRight; // Use the slideRight variable to determine the slide direction
+      slideRight = !slideRight; // Toggle the slide direction for the next random text
+    }
+
+    function animateText(element) {
+      var duration = Math.floor(Math.random() * 10) + 9 + "s"; // Random animation duration between 5s and 15s
+      element.style.animationDuration = duration;
+
+      element.addEventListener("animationend", function() {
+        if (!isInViewport(element)) {
+        element.remove(); // Remove the text element if it's not in the viewport after the animation
+        }
+        });
+        
+
+      var isInViewport = function (el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      };
+
+      setTimeout(function() {
+        if (!isInViewport(element)) {
+          fadeOutAndRemove(element); // Remove the text element if it is not on the screen after the animation
+        } else {
+          setTimeout(function() {
+            fadeOutAndRemove(element); // Remove the text element after a delay
+          }, 5000);
+        }
+      }, durationToMilliseconds(duration));
+    }
+
+    function fadeOutAndRemove(element) {
+      element.style.opacity = 0;
+      setTimeout(function() {
+        element.remove();
+      }, 1000);
+    }
+
+    function durationToMilliseconds(duration) {
+      var parts = duration.match(/(\d+)(s|ms)/);
+      var value = parseInt(parts[1]);
+      var unit = parts[2];
+
+      if (unit === "s") {
+        return value * 1000;
+      } else if (unit === "ms") {
+        return value;
+      }
+      return 0;
+    }
+
+    // Generate random text every 2 seconds
+    setInterval(generateRandomText, 2000);
   </script>
 </body>
 </html>
