@@ -31,7 +31,7 @@
     .custom-btn {
       font-size: 28px; /* Change the font size of the button text */
       font-weight: bold;
-      transition: transform 0.4s;
+      transition: transform 0.2s;
     }
     .custom-btn.active {
       font-size: 28px; /* Increase font weight when button is active */
@@ -43,41 +43,32 @@
       font-weight: bold; /* Make the text bold */
     }
     #countdownTitle {
-      color: gray; /* Set the color to gray */
+      color: rgb(255, 255, 255); /* Set the color to gray */
       font-size: 15px; /* Adjust the font size as desired */
       font-weight: bold;
       margin-top: 5px; /* Add some top margin to create spacing */
     }
-    .random-text {
-      position: absolute;
-      top: calc(50% - 20px); /* Adjust the starting position from top */
-      left: calc(50% - 50px); /* Adjust the starting position from left */
-      color: #ffc107; /* Set the text color to yellow */
-      opacity: 0.2; /* Set the opacity to 50% */
-      white-space: nowrap;
-      animation: slide linear infinite;
+    #imageOverlay {
+      position: absolute; /* Position the image overlay */
+      top: 40%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+      width: 80px; /* Set the width of the image overlay */
+      height: 80px; /* Set the height of the image overlay */
+      background-image: url("media/gb-w1.png"); /* Replace with the path to your image */
+      background-size: cover;
+      background-position: center;
+      z-index: 2; /* Ensure the image overlay is above the countdown timer */
     }
-    .slide-right {
-      animation-direction: alternate-reverse; /* Slide from right to left */
-    }
-    .slide-down {
-      top: calc(-100vh); /* Starting position from top outside the screen */
-      left: calc(50% - 50px); /* Adjust the starting position from left */
-    }
-    @keyframes slide {
-      0% {
-        transform: translateX(100vw);
-      }
-      100% {
-        transform: translateX(-100vw);
-      }
-    }
+
+    
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div id="timer"></div>
+    <div id="imageOverlay"></div>
     <div id="countdownTitle">27 Juni 2023</div>
     <div class="d-flex justify-content-center">
       <button id="startButton" class="btn btn-warning fade-button btn-grow custom-btn w-50" style="display: none;" disabled>Öppna</button>
@@ -107,6 +98,7 @@
         document.getElementById("startButton").style.display = "block";
         document.getElementById("startButton").disabled = false;
         document.getElementById("countdownTitle").style.display = "none";
+        document.getElementById("imageOverlay").style.backgroundImage = "url('media/gb-g1.png')";
       }
     }, 1000);
 
@@ -124,7 +116,7 @@
       myButton.classList.add("active");
       setTimeout(function() {
         myButton.classList.remove("active");
-      }, 500);
+      }, 300);
     });
 
 
