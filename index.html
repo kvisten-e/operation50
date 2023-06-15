@@ -11,7 +11,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url("media/Countdown\ –\ 1.png");
+      background-image: url("media/bg-v2.jpg");
       background-size: cover;
       background-position: center;
       overflow: hidden; /* Prevent scrolling */
@@ -43,9 +43,10 @@
       font-weight: bold; /* Make the text bold */
     }
     #countdownTitle {
-      color: #ffc107; /* Change the color to yellow */
-      font-size: 30px; /* Change the font size */
-      font-weight: bold; /* Make the text bold */
+      color: gray; /* Set the color to gray */
+      font-size: 15px; /* Adjust the font size as desired */
+      font-weight: bold;
+      margin-top: 5px; /* Add some top margin to create spacing */
     }
     .random-text {
       position: absolute;
@@ -77,14 +78,16 @@
 <body>
   <div class="container">
     <div id="timer"></div>
+    <div id="countdownTitle">27 Juni 2023</div>
     <div class="d-flex justify-content-center">
       <button id="startButton" class="btn btn-warning fade-button btn-grow custom-btn w-50" style="display: none;" disabled>Öppna</button>
     </div>
   </div>
+  
 
   <script>
     // Countdown timer
-    var countDownDate = new Date().getTime() + 10000000; // 1000 = 1 second
+    var countDownDate = new Date().getTime() + 10000; // 1000 = 1 second
     var x = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
@@ -124,82 +127,7 @@
       }, 500);
     });
 
-    // Generate and animate random text
-    function generateRandomText() {
-      var texts = [
-        "Emil är bäst",
-        "Grattis!",
-        "50år skojar man inte bort",
-        "Hurra bästa morsa",
-        "Enastående",
-        "Du är bäst!",
-      ];
 
-      var text = texts[Math.floor(Math.random() * texts.length)];
-      var fontSize = Math.floor(Math.random() * 20) + 10 + "px"; // Random font size between 10px and 30px
-      var startingPosition = Math.floor(Math.random() * 100) + "vw"; // Random starting position outside the screen
-      var isSlideRight = Math.random() < 0.5; // Randomly determine slide direction
-      var textElement = document.createElement("div");
-      textElement.textContent = text;
-      textElement.classList.add("random-text");
-      textElement.style.fontSize = fontSize;
-      textElement.style.top = isSlideRight ? startingPosition : "-100vh"; // Adjust starting position from top
-      textElement.style.left = isSlideRight ? "calc(50% - 50px)" : startingPosition; // Adjust starting position from left
-      textElement.classList.toggle("slide-right", isSlideRight);
-      textElement.classList.toggle("slide-down", !isSlideRight); // Apply slide-down class for top-to-bottom animation
-      document.body.appendChild(textElement);
-      animateText(textElement);
-    }
-
-    function animateText(element) {
-      var duration = Math.floor(Math.random() * 10) + 9 + "s"; // Random animation duration between 5s and 15s
-      element.style.animationDuration = duration;
-
-      var isInViewport = function (el) {
-        var rect = el.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-      };
-
-      setTimeout(function() {
-        if (!isInViewport(element)) {
-          fadeOutAndRemove(element); // Remove the text element if it is not on the screen after 12 seconds
-        } else {
-          element.addEventListener("animationend", function() {
-            if (!isInViewport(element)) {
-              fadeOutAndRemove(element); // Remove the text element if it goes outside the screen after the animation
-            }
-          });
-        }
-      }, 12000);
-    }
-
-    function fadeOutAndRemove(element) {
-      var opacity = 0.2;
-      var fadeOutInterval = setInterval(function() {
-        if (opacity > 0) {
-          opacity -= 0.02; // Adjust the fade-out speed by changing the decrement value (0.05 in this case)
-          element.style.opacity = opacity;
-        } else {
-          clearInterval(fadeOutInterval);
-          element.remove(); // Remove the text element after fade-out
-        }
-      }, 100); // Adjust the interval time (100 milliseconds in this case) to control the smoothness of the fade-out effect
-    }
-
-    setInterval(generateRandomText, 4000); // Generate a new random text every 2 seconds
-
-    // Prevent screen scrolling
-    document.body.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-    }, { passive: false });
-    document.body.addEventListener('mousewheel', function(e) {
-      e.preventDefault();
-    }, { passive: false });
   </script>
 </body>
 </html>
