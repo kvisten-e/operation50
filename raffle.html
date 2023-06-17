@@ -28,7 +28,6 @@
     .borja img{
       width: 130%;
       height: auto;
-      z-index: 2;
     }
     .canvas {
     position: absolute;
@@ -39,17 +38,16 @@
     }
 
     .vinst {
-    position: absolute;
-    top: 30.6%;
-    left: 12.3%;
-    width: 88%;
-    height: 0;
-    padding-bottom: 87%;
-    background: url("media/vinst-triss.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 0;
-   }
+      text-align: center;
+      position: relative; /* Add position relative */
+      top: 0.5%; /* Adjust the vertical position */
+      z-index: 0;
+    }
+
+  .vinst img {
+      max-width: 76%;
+      max-height: auto;
+  }
     
     .form {
     padding: 20px;
@@ -76,7 +74,9 @@
     <img src="media/Artboard_7.png">
   </div>
   <canvas class="canvas" id="js-canvas" width="312" height="358"></canvas>
-    <div class="vinst"></div>
+    <div class="vinst">
+      <img src="media/vinst-triss.png">
+    </div>
     <div class="d-flex justify-content-center"      style="margin-top: -650px;">
       <button id="kontroll" class="btn btn-outline-warning fade-button custom-btn" style="display: none;" disabled data-bs-toggle="modal">Kontrollera vinst</button>
     </div>
