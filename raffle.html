@@ -162,7 +162,11 @@
   function handlePercentage(filledInPixels) {
     filledInPixels = filledInPixels || 0;
     console.log(filledInPixels + '%');
-
+    if (filledInPixels > 1) {
+        const borjaDiv = document.getElementById('borja-triss');
+        borjaDiv.style.display = 'none'; // Hide the container div
+        borjaDiv.innerHTML = ''; // Remove the image element from the container div
+      }
     if (filledInPixels > 70) {
       //canvas.parentNode.removeChild(canvas);
       document.getElementById("kontroll").classList.remove("fade-button");
