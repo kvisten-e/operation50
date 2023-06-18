@@ -75,7 +75,7 @@ body {
     <img src="media/Artboard_7.png">
   </div>
   <div class="canvas-container">
-    <canvas class="canvas" id="js-canvas"></canvas> 
+    <canvas class="canvas" id="js-canvas" data-breddbild="" data-hojdbild=""></canvas> 
   </div>
 
 
@@ -100,6 +100,8 @@ body {
     const canvas = document.getElementById('js-canvas');
       canvas.width = breddbild;
       canvas.height = hojdbild;
+      canvas.setAttribute('data-breddbild', breddbild);
+      canvas.setAttribute('data-hojdbild', hojdbild);
 
 
  (function() {
