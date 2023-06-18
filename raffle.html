@@ -83,7 +83,12 @@ body {
   
 
 <script>
+//kolla bakgrunds storlek
+const body = document.querySelector('body');
+const { width, height } = body.getBoundingClientRect();
 
+console.log('Image Width:', width);
+console.log('Image Height:', height);
 
     // Get the device size and print it in the console
     const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
