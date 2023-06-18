@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url("media/bakgrund-triss-1.png");
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-      position: relative;
-    }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("media/bakgrund-triss-1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  position: relative;
+}
     .borja {
     position: absolute;
     top: 50%;
@@ -55,6 +56,16 @@
       width: 100%;
       border-radius: 10px
     }
+    .test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test img {
+  max-width: 100%; /* Adjust the maximum width of the image */
+  max-height: 100%; /* Adjust the maximum height of the image */
+}
 
 
   </style>
@@ -64,8 +75,9 @@
     <img src="media/Artboard_7.png">
   </div>
   <div class="canvas-container">
-    <canvas class="canvas" id="js-canvas" width="312" height="358"></canvas> 
+    <canvas class="canvas" id="js-canvas"></canvas> 
   </div>
+
 
   
   
@@ -78,13 +90,16 @@
     const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
     const breddbild = deviceWidth*0.757281
-    const hojdbild = breddbild/0.8715
+    const hojdbild = 358
 
     console.log('Device Width:', deviceWidth);
     console.log('Device Height:', deviceHeight);
     console.log('Bild Width:', breddbild);
     console.log('Bild Height:', hojdbild);
-
+    
+    const canvas = document.getElementById('js-canvas');
+      canvas.width = breddbild;
+      canvas.height = hojdbild;
 
 
  (function() {
@@ -94,8 +109,8 @@
   var isDrawing, lastPoint;
   var container    = document.getElementById('js-container'),
       canvas       = document.getElementById('js-canvas'),
-      canvasWidth  = canvas.breddbild,
-      canvasHeight = canvas.hojdbild,
+      canvasWidth  = canvas.width,
+      canvasHeight = canvas.height,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
       brush        = new Image();
