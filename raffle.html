@@ -31,6 +31,18 @@
     z-index: 1;
     }
 
+    .vinst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 344px;
+    background: url("media/Artboard–2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
     
     .form {
     padding: 20px;
@@ -41,7 +53,7 @@
 <body>
     
     <canvas class="canvas" id="js-canvas" width="300" height="344"></canvas>
-    
+    <div class="vinst"></div>
 
 
   <script>
@@ -123,7 +135,7 @@
   function handlePercentage(filledInPixels) {
     filledInPixels = filledInPixels || 0;
     console.log(filledInPixels + '%');
-    if (filledInPixels > 50) {
+    if (filledInPixels > 90) {
       canvas.parentNode.removeChild(canvas);
     }
   }
