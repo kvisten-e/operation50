@@ -12,7 +12,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: url("media/bakgrund-triss.png");
+      background-image: url("media/bakgrund-triss-1.png");
       background-size: cover;
       background-position: center;
       overflow: hidden;
@@ -29,25 +29,20 @@
       width: 130%;
       height: auto;
     }
+    .canvas-container {
+      position: absolute;
+      top: 30.8%;
+      width: 76%; /* Adjust the width percentage as needed */
+      height: auto; /* Set the container height to 100% */
+      display: flex; /* Use flexbox for vertical centering */    
+      justify-content: center; /* Center the canvas horizontally */
+      z-index: 1;
+    }
     .canvas {
-    position: absolute;
-    background-size: cover;
-    z-index: 1;
-    opacity: 100%;
-    top: 30.78%;
+      max-width: 100%; /* Adjust the canvas size */
+      max-height: 100%; /* Adjust the canvas size */
     }
 
-    .vinst {
-      text-align: center;
-      position: relative; /* Add position relative */
-      top: 0.5%; /* Adjust the vertical position */
-      z-index: 0;
-    }
-
-    .vinst img {
-      max-width: 76%;
-      max-height: auto;
-    }
     
     .form {
     padding: 20px;
@@ -69,11 +64,10 @@
   <div class="borja" id="borja-triss">
     <img src="media/Artboard_7.png">
   </div>
-  
-  <canvas class="canvas" id="js-canvas" width="312" height="358"></canvas>
-  <div class="vinst">
-    <img src="media/vinst-triss.png">
+  <div class="canvas-container">
+    <canvas class="canvas" id="js-canvas" width="312" height="358"></canvas> 
   </div>
+
   
 
 
