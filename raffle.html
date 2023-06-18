@@ -30,20 +30,17 @@
       height: auto;
     }
     .canvas-container {
-  position: absolute;
-  top: 30.74%;
-  left: 20%; /* Set the left position to 20% */
-  width: 60%; /* Set the width to 60% */
-  height: auto; /* Set the container height to 100% */
-  justify-content: center; /* Center the canvas horizontally */
-  z-index: 1;
-}
-.canvas {
-  width: 100%; /* Adjust the width percentage as needed */
-  height: 100%; /* Set the height to 100% */
-  max-width: 100%; /* Adjust the canvas size */
-  max-height: 100%; /* Adjust the canvas size */
-}
+      position: absolute;
+      top: 30.74%;
+      height: auto; /* Set the container height to 100% */    
+      justify-content: center; /* Center the canvas horizontally */
+      z-index: 1;
+    }
+    .canvas {
+      width: 100%; /* Adjust the width percentage as needed */
+      max-width: 100%; /* Adjust the canvas size */
+      max-height: 100%; /* Adjust the canvas size */
+    }
 
     
     .form {
@@ -71,10 +68,27 @@
   </div>
 
   
-
-
+  
 
 <script>
+
+
+    // Get the device size and print it in the console
+    const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    breddbild = deviceWidth*0.757281
+    hojdbild = breddbild/0.8715
+
+    console.log('Device Width:', deviceWidth);
+    console.log('Device Height:', deviceHeight);
+    console.log('Bild Width:', breddbild);
+    console.log('Bild Height:', hojdbild);
+
+    const canvasElement1 = document.getElementById('js-canvas');
+    canvasElement.setAttribute('width', breddbild);
+    const canvasElement2 = document.getElementById('js-canvas');
+    canvasElement.setAttribute('height', hojdbild);
 
  (function() {
   
@@ -83,8 +97,8 @@
   var isDrawing, lastPoint;
   var container    = document.getElementById('js-container'),
       canvas       = document.getElementById('js-canvas'),
-      canvasWidth  = canvas.width,
-      canvasHeight = canvas.height,
+      canvasWidth  = canvas.breddbild,
+      canvasHeight = canvas.hojdbild,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
       brush        = new Image();
