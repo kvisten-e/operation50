@@ -19,6 +19,7 @@
       overflow: hidden;
       position: relative;
     }
+
     .canvas {
     position: absolute;
     display: flex;
@@ -55,6 +56,27 @@
     max-width: 300px;
     height: auto;  
     }
+    
+    .fade-in {
+      opacity: 1;
+      transition: opacity 3s;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1050; /* Higher than modal dialog */
+    }
+
+    .modal-content {
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1060; /* Higher than modal overlay */
+    }
 
   </style>
 </head>
@@ -65,13 +87,54 @@
     </div>
     <canvas class="canvas" id="js-canvas" width="317" height="365"></canvas>
     <div class="d-flex justify-content-center" style="margin-top: 750px;">
-      <button id="kontroll" class="btn btn-dark custom-btn" style="display: none;" disabled data-bs-toggle="modal">Kontrollera vinst</button>
+      <button id="kontroll" class="btn btn-dark custom-btn" >Kontrollera vinst</button>
     </div>
+  
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-overlay"></div> <!-- Overlay element -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">Popup Box Title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This is the content of the popup box.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("kontroll").addEventListener("click", function() {
+      // Add a fade-in class to the body element
+      document.body.classList.add('fade-in');
+
+      // Show the Bootstrap modal after a delay
+      setTimeout(function() {
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+
+        // Add a delay before changing the opacity of the modal content to 1
+        setTimeout(function() {
+          var modalContent = document.querySelector('.modal-content');
+          modalContent.style.opacity = 1;
+        }, 10000); // Delay of 10 seconds
+      }, 1000); // Delay of 5 seconds before showing the modal
+    });
+  </script>
 
 
 <script>
+
+
  (function() {
-  
+
   'use strict';
   
   var isDrawing, lastPoint;
