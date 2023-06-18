@@ -259,44 +259,43 @@ trordeButton.addEventListener("click", function() {
 });
 
  
-    // Generate and animate random text
-    var slideRight = true;
-    function generateRandomText() {
-      var texts = [
-        "Emil är bäst",
-        "Grattis!",
-        "50år skojar man inte bort",
-        "Hurra bästa morsa",
-        "Enastående",
-        "Du är bäst!",
-      ];
+var slideRight = true; // Variable to determine the initial slide direction
 
-      var text = texts[Math.floor(Math.random() * texts.length)];
-      var fontSize = Math.floor(Math.random() * 25) + 10 + "px"; // Random font size between 10px and 30px
-      var startingPosition = Math.floor(Math.random() * 100) + "vw"; // Random starting position outside the screen
-      var isSlideRight = Math.random() < 0.5; // Randomly determine slide direction
-      
-      var fontWeight = ['bold', 'normal', 'normal', 'normal']; // Adjust the probabilities of different font weights
-      var fontStyle = ['normal', 'italic', 'normal', 'normal']; // Adjust the probabilities of different font styles
+function generateRandomText() {
+  var texts = [
+    "Emil är bäst",
+    "Grattis!",
+    "50år skojar man inte bort",
+    "Hurra bästa morsa",
+    "Enastående",
+    "Du är bäst!",
+  ];
 
-      var randomFontWeight = fontWeight[Math.floor(Math.random() * fontWeight.length)];
-      var randomFontStyle = fontStyle[Math.floor(Math.random() * fontStyle.length)];    
-      
-      var textElement = document.createElement("div");
-      textElement.textContent = text;
-      textElement.classList.add("random-text");
-      textElement.style.fontSize = fontSize;
-      textElement.classList.add("font-weight-" + randomFontWeight);
-      textElement.classList.add("font-style-" + randomFontStyle);
-      textElement.style.top = isSlideRight ? startingPosition : "-100vh";
-      textElement.style.left = isSlideRight ? "calc(50% - 50px)" : startingPosition;
-      textElement.classList.toggle("slide-right", isSlideRight);
-      textElement.classList.toggle("slide-down", !isSlideRight);
-      document.body.appendChild(textElement);
-      animateText(textElement);
-      var isSlideRight = slideRight; // Use the slideRight variable to determine the slide direction
-      slideRight = !slideRight; // Toggle the slide direction for the next random text
-    }
+  var text = texts[Math.floor(Math.random() * texts.length)];
+  var fontSize = Math.floor(Math.random() * 25) + 10 + "px"; // Random font size between 10px and 30px
+  var startingPosition = Math.floor(Math.random() * 100) + "vw"; // Random starting position outside the screen
+  var isSlideRight = slideRight; // Use the slideRight variable to determine the slide direction
+  
+  var fontWeight = ['bold', 'normal', '500', '100']; // Adjust the probabilities of different font weights
+  var fontStyle = ['normal', 'italic', 'oblique', 'normal']; // Adjust the probabilities of different font styles
+
+  var randomFontWeight = fontWeight[Math.floor(Math.random() * fontWeight.length)];
+  var randomFontStyle = fontStyle[Math.floor(Math.random() * fontStyle.length)];    
+  
+  var textElement = document.createElement("div");
+  textElement.textContent = text;
+  textElement.classList.add("random-text");
+  textElement.style.fontSize = fontSize;
+  textElement.classList.add("font-weight-" + randomFontWeight);
+  textElement.classList.add("font-style-" + randomFontStyle);
+  textElement.style.top = isSlideRight ? startingPosition : "-100vh";
+  textElement.style.left = isSlideRight ? "calc(50% - 50px)" : startingPosition;
+  textElement.classList.toggle("slide-right", isSlideRight);
+  textElement.classList.toggle("slide-left", !isSlideRight);
+  document.body.appendChild(textElement);
+  animateText(textElement);
+  slideRight = !slideRight; // Toggle the slide direction for the next random text
+}
 
     function animateText(element) {
       var duration = Math.floor(Math.random() * 10) + 9 + "s"; // Random animation duration between 5s and 15s
