@@ -13,7 +13,7 @@ body {
   align-items: center;
   height: 100vh;
   background-image: url("media/bakgrund-triss-1.png");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
@@ -90,7 +90,7 @@ body {
     const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
     const breddbild = deviceWidth*0.757281
-    const hojdbild = 358
+    const hojdbild = breddbild/0.8715
 
     console.log('Device Width:', deviceWidth);
     console.log('Device Height:', deviceHeight);
