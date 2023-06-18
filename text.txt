@@ -4,3 +4,6 @@ iVBORw0KGgoAAAANSUhEUgAABaAAAAxgCAMAAAAbDk+dAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAA
 
 639 x 729
 0,8765432
+
+
+      <button id="kontroll" class="btn btn-outline-warning fade-button custom-btn" style="display: none;" disabled data-bs-toggle="modal">Kontrollera vinst</button>
