@@ -7,17 +7,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url("media/bakgrund-triss-1.png");
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-      position: relative;
-    }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align items to the bottom */
+    min-height: 100vh; /* Use min-height instead of height */
+    background-image: url("media/bakgrund-triss-1.png");
+    background-size: cover;
+    background-position: center bottom; /* Adjust background position to bottom */
+    overflow: hidden;
+    position: relative;
+  }
     .borja {
     position: absolute;
     top: 50%;
@@ -31,7 +31,7 @@
     }
     .canvas-container {
       position: absolute;
-      top: 30.74%;
+      bottom:29.1%;
       height: auto; /* Set the container height to 100% */    
       justify-content: center; /* Center the canvas horizontally */
       z-index: 1;
@@ -77,18 +77,15 @@
     const deviceWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const deviceHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-    breddbild = deviceWidth*0.757281
-    hojdbild = breddbild/0.8715
+    const breddbild = deviceWidth*0.757281
+    const hojdbild = breddbild/0.8715
 
     console.log('Device Width:', deviceWidth);
     console.log('Device Height:', deviceHeight);
     console.log('Bild Width:', breddbild);
     console.log('Bild Height:', hojdbild);
 
-    const canvasElement1 = document.getElementById('js-canvas');
-    canvasElement.setAttribute('width', breddbild);
-    const canvasElement2 = document.getElementById('js-canvas');
-    canvasElement.setAttribute('height', hojdbild);
+
 
  (function() {
   
