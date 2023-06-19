@@ -134,13 +134,18 @@
     setTimeout(function() {
       var myModal = new bootstrap.Modal(document.getElementById('myModal'));
       myModal.show();
+    
+    var modalContent = document.querySelector('.modal-content');
+    modalContent.style.opacity = 0;
 
-      // Create a countdown element
+    if (parseFloat(modalContent.style.opacity) === 0) {
+    // Create a countdown element
       var countdown = document.createElement('div');
       countdown.classList.add('countdown');
       document.body.appendChild(countdown);
 
-      // Start the countdown from 15
+    // Start the countdown from 15
+    
       var count = 15;
       countdown.innerHTML = count;
 
@@ -153,30 +158,25 @@
         if (count === 0) {
           clearInterval(countdownInterval);
           countdown.remove();
-          myModal.hide(); // Hide the modal
-          document.body.classList.remove('fade-in'); // Remove the fade-in class
+          // Reset the modal here
+          var modalContent = document.querySelector('.modal-content');
+          modalContent.style.opacity = 1;
         }
       }, 1000);
+    }
 
       // Add event listeners to handle clicks and modal closing
       myModal._element.addEventListener('click', resetCountdown);
-      myModal._element.querySelector('.modal-close').addEventListener('click', resetCountdown);
+
 
       // Function to reset the countdown and remove event listeners
       function resetCountdown() {
         clearInterval(countdownInterval);
         countdown.remove();
-        myModal.hide(); // Hide the modal
-        document.body.classList.remove('fade-in'); // Remove the fade-in class
         myModal._element.removeEventListener('click', resetCountdown);
-        myModal._element.querySelector('.modal-close').removeEventListener('click', resetCountdown);
       }
 
-      // Add a delay before changing the opacity of the modal content to 1
-      setTimeout(function() {
-        var modalContent = document.querySelector('.modal-content');
-        modalContent.style.opacity = 1;
-      }, 15000); // Delay of 15 seconds
+
     }, 1000); // Delay of 5 seconds before showing the modal
   });
     //--------------------------------------------------------------
@@ -184,7 +184,6 @@
 
 
 <script>
-
 
  (function() {
 
@@ -310,7 +309,8 @@
     isDrawing = false;
   }
   
-})();   
+})();  
+ 
   </script>
 
 </body>
