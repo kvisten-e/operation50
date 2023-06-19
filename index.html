@@ -23,6 +23,7 @@
       padding: 20px;
       border-radius: 10px;
       font-family: 'Quicksand', sans-serif;
+      z-index: 2;
     }
     .fade-button {
       opacity: 0.5;
@@ -63,9 +64,10 @@
     }     
 
     #timer {
-      color: #ffc107; /* Change the color to yellow */
-      font-size: 32px; /* Change the font size */
+      color: #ffffff; /* Change the color to yellow */
+      font-size: 38px; /* Change the font size */
       font-weight: bold; /* Make the text bold */
+
     }
     #countdownTitle {
       color: rgb(255, 255, 255); /* Set the color to gray */
@@ -90,43 +92,7 @@
       font-size: 32px; /* Change the font size */
       font-weight: bold; /* Make the text bold */      
     }
-    .random-text {
-      position: absolute;
-      top: calc(50% - 20px); /* Adjust the starting position from top */
-      left: calc(50% - 50px); /* Adjust the starting position from left */
-      color: #ffc107; /* Set the text color to yellow */
-      opacity: 0.2; /* Set the opacity to 50% */
-      white-space: nowrap;
-      animation: slide linear infinite;
-      font-weight: light; /* Default font weight */
-      font-style: normal; /* Default font style */
-    }
-    .random-text.font-weight-light {
-      font-weight: lighter;
-    }
 
-    .random-text.font-weight-semi-bold {
-      font-weight: 600;
-    }
-
-    .random-text.font-style-italic {
-      font-style: italic;
-    }
-    .slide-right {
-      animation-direction: alternate; /* Slide alternately from right to left and left to right */
-    }
-    .slide-down {
-      top: calc(-100vh); /* Starting position from top outside the screen */
-      left: calc(50% - 50px); /* Adjust the starting position from left */
-    }
-    @keyframes slide {
-      0% {
-        transform: translateX(100vw);
-      }
-      100% {
-        transform: translateX(-100vw);
-      }
-    }
     .pulse-glow {
     animation: pulse 1.5s infinite;
     }
@@ -137,6 +103,51 @@
       }
       100% {
         box-shadow: 0 0 0 10px rgb(0, 0, 0);
+      }
+    }
+
+    .slide-in-out-left,
+    .slide-in-out-right {
+      position: absolute;
+      top: 50%; /* Set initial position to the middle */
+      transform: translateY(-50%); /* Adjust for vertical alignment */
+      white-space: nowrap; /* Prevent text wrapping */
+      animation-duration: 9.8s; /* Adjusted animation duration for 30% slower pace */
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      overflow: hidden; /* Hide any overflowing text */
+      z-index: 1;
+    }
+
+    .slide-in-out-left {
+      left: -100%; /* Start outside the screen from the left */
+      animation-name: slideInOutLeft;
+      animation-delay: 2s; /* Delay before the animation starts */
+      z-index: 1;
+    }
+
+    .slide-in-out-right {
+      right: -100%; /* Start outside the screen from the right */
+      animation-name: slideInOutRight;
+      animation-delay: 2s; /* Delay before the animation starts */
+      z-index: 1;
+    }
+
+    @keyframes slideInOutLeft {
+      0% {
+        left: -100%; /* Start outside the screen from the left */
+      }
+      100% {
+        left: 100%; /* Slide to the outside screen on the right */
+      }
+    }
+
+    @keyframes slideInOutRight {
+      0% {
+        right: -100%; /* Start outside the screen from the right */
+      }
+      100% {
+        right: 100%; /* Slide to the outside screen on the left */
       }
     }
     
@@ -178,6 +189,13 @@
     </div>
   </div>
   
+  <div class="slide-in-out-left"></div>
+  <div class="slide-in-out-left"></div> 
+  <div class="slide-in-out-right"></div>
+  <div class="slide-in-out-right"></div> 
+  
+
+
   <script src="js/confetti.js" type="module"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -258,99 +276,109 @@ trordeButton.addEventListener("click", function() {
   }, 300);
 });
 
- 
-var slideRight = true; // Variable to determine the initial slide direction
+ // Glidande texten
+ document.addEventListener("DOMContentLoaded", function() {
+      var textsLeft = [
+        "Femtio år ung",
+        "Ganska galna barn",
+        "Vad kan detta vara?",
+        "Snart smäller det!",
+        "Plötsligt händer det?"
+      ];
 
-function generateRandomText() {
-  var texts = [
-    "Emil är bäst",
-    "Grattis!",
-    "50år skojar man inte bort",
-    "Hurra bästa morsa",
-    "Enastående",
-    "Du är bäst!",
-  ];
+      var textsRight = [
+        "Bästa morsan",
+        "Trevligt vi ska ha det!",
+        "Tick-Tock",
+        "Undra vad som ska hända på 00:00:00",
+        "Hipp Hipp Hurra för snart är det din födelsedáa"
+      ];
 
-  var text = texts[Math.floor(Math.random() * texts.length)];
-  var fontSize = Math.floor(Math.random() * 25) + 10 + "px"; // Random font size between 10px and 30px
-  var startingPosition = Math.floor(Math.random() * 100) + "vw"; // Random starting position outside the screen
-  var isSlideRight = slideRight; // Use the slideRight variable to determine the slide direction
-  
-  var fontWeight = ['bold', 'normal', '500', '100']; // Adjust the probabilities of different font weights
-  var fontStyle = ['normal', 'italic', 'oblique', 'normal']; // Adjust the probabilities of different font styles
+      var fonts = [
+        "Arial",
+        "Times New Roman",
+        "Verdana",
+        "Courier New",
+        "Georgia"
+      ];
 
-  var randomFontWeight = fontWeight[Math.floor(Math.random() * fontWeight.length)];
-  var randomFontStyle = fontStyle[Math.floor(Math.random() * fontStyle.length)];    
-  
-  var textElement = document.createElement("div");
-  textElement.textContent = text;
-  textElement.classList.add("random-text");
-  textElement.style.fontSize = fontSize;
-  textElement.classList.add("font-weight-" + randomFontWeight);
-  textElement.classList.add("font-style-" + randomFontStyle);
-  textElement.style.top = isSlideRight ? startingPosition : "-100vh";
-  textElement.style.left = isSlideRight ? "calc(50% - 50px)" : startingPosition;
-  textElement.classList.toggle("slide-right", isSlideRight);
-  textElement.classList.toggle("slide-left", !isSlideRight);
-  document.body.appendChild(textElement);
-  animateText(textElement);
-  slideRight = !slideRight; // Toggle the slide direction for the next random text
-}
+      var fontStyles = [
+        "normal",
+        "italic",
+        "bold"
+      ];
 
-    function animateText(element) {
-      var duration = Math.floor(Math.random() * 10) + 9 + "s"; // Random animation duration between 5s and 15s
-      element.style.animationDuration = duration;
+      var slideInOutLeft = document.querySelectorAll(".slide-in-out-left");
+      var slideInOutRight = document.querySelectorAll(".slide-in-out-right");
 
-      element.addEventListener("animationend", function() {
-        if (!isInViewport(element)) {
-        element.remove(); // Remove the text element if it's not in the viewport after the animation
-        }
-        });
-        
-
-      var isInViewport = function (el) {
-        var rect = el.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-      };
-
-      setTimeout(function() {
-        if (!isInViewport(element)) {
-          fadeOutAndRemove(element); // Remove the text element if it is not on the screen after the animation
-        } else {
-          setTimeout(function() {
-            fadeOutAndRemove(element); // Remove the text element after a delay
-          }, 5000);
-        }
-      }, durationToMilliseconds(duration));
-    }
-
-    function fadeOutAndRemove(element) {
-      element.style.opacity = 0;
-      setTimeout(function() {
-        element.remove();
-      }, 1000);
-    }
-
-    function durationToMilliseconds(duration) {
-      var parts = duration.match(/(\d+)(s|ms)/);
-      var value = parseInt(parts[1]);
-      var unit = parts[2];
-
-      if (unit === "s") {
-        return value * 1000;
-      } else if (unit === "ms") {
-        return value;
+      function getRandomFontSize() {
+        return Math.floor(Math.random() * 20) + 15; // Random font size between 10px and 20px
       }
-      return 0;
-    }
 
-    // Generate random text every 2 seconds
-    setInterval(generateRandomText, 2000);
+      function updateTextAndAnimateLeft() {
+        slideInOutLeft.forEach(function(element, index) {
+          setTimeout(function() {
+            var randomText = textsLeft[Math.floor(Math.random() * textsLeft.length)];
+            var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            var randomFontSize = getRandomFontSize();
+            var randomFontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+
+            element.textContent = randomText;
+            element.style.fontFamily = randomFont;
+            element.style.fontSize = randomFontSize + "px";
+            element.style.fontStyle = randomFontStyle;
+
+            var screenHeight = window.innerHeight;
+            var randomY = Math.floor(Math.random() * (screenHeight / 2)); // Random position between top and middle
+            element.style.top = randomY + "px";
+
+            setTimeout(function() {
+              element.style.animation = "none"; // Remove animation
+              setTimeout(function() {
+                element.style.animation = "slideInOutLeft 9.8s linear forwards"; // Add back the animation with adjusted duration
+              }, 100); // Wait for a very short time before adding back the animation
+            }, 9800); // Delay before starting the next slide (30% slower)
+
+          }, index * 4000); // Delay each duplicate text by 4 seconds (30% slower)
+        });
+      }
+
+      function updateTextAndAnimateRight() {
+        slideInOutRight.forEach(function(element, index) {
+          setTimeout(function() {
+            var randomText = textsRight[Math.floor(Math.random() * textsRight.length)];
+            var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            var randomFontSize = getRandomFontSize();
+            var randomFontStyle = fontStyles[Math.floor(Math.random() * fontStyles.length)];
+
+            element.textContent = randomText;
+            element.style.fontFamily = randomFont;
+            element.style.fontSize = randomFontSize + "px";
+            element.style.fontStyle = randomFontStyle;
+
+            var screenHeight = window.innerHeight;
+            var randomY = Math.floor(Math.random() * (screenHeight / 2)); // Random position between top and middle
+            element.style.top = randomY + "px";
+
+            setTimeout(function() {
+              element.style.animation = "none"; // Remove animation
+              setTimeout(function() {
+                element.style.animation = "slideInOutRight 9.8s linear forwards"; // Add back the animation with adjusted duration
+              }, 100); // Wait for a very short time before adding back the animation
+            }, 9800); // Delay before starting the next slide (30% slower)
+
+          }, index * 4000); // Delay each duplicate text by 4 seconds (30% slower)
+        });
+      }
+
+      updateTextAndAnimateLeft(); // Call initially
+      updateTextAndAnimateRight(); // Call initially
+
+      setInterval(updateTextAndAnimateLeft, 10000); // Call every 9.8 seconds for left text (30% slower)
+      setInterval(updateTextAndAnimateRight, 10000); // Call every 9.8 seconds for right text (30% slower)
+    });
+
+
   </script>
 </body>
 </html>
