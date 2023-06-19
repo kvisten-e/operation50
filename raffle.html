@@ -43,6 +43,7 @@
       transition: transform 0.2s;
       width: 100%;
       border-radius: 10px
+      
     
     }
     .borja {
@@ -97,8 +98,8 @@
       <img src="media/borja-1.png">
     </div>
     <canvas class="canvas" id="js-canvas" width="317" height="365"></canvas>
-    <div class="d-flex justify-content-center" style="margin-top: 750px;">
-      <button id="kontroll" class="btn btn-dark custom-btn" >Kontrollera vinst</button>
+    <div class="d-flex justify-content-center" style="margin-top: -700px;">
+      <button id="kontroll" class="btn btn-dark custom-btn"style="display: none;" disabled data-bs-toggle="modal" >Kontrollera vinst</button>
     </div>
   
   <!-- Bootstrap Modal -->
@@ -272,8 +273,6 @@
     
     
     if (filledInPixels > 70) {
-      //canvas.parentNode.removeChild(canvas);
-      document.getElementById("kontroll").classList.remove("fade-button");
       document.getElementById("kontroll").style.display = "block";
       document.getElementById("kontroll").disabled = false;
     }
