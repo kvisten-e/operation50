@@ -115,6 +115,8 @@
       animation: slideInOut 16s linear forwards;
       overflow: hidden; /* Hide any overflowing text */
       z-index: 1;
+      color: white;
+      opacity: 0.6;      
     }  
     .slide-in-out-vanster {
       position: absolute;
@@ -125,6 +127,8 @@
       animation: slideInOutVanster 16s linear forwards;
       overflow: hidden; /* Hide any overflowing text */
       z-index: 1;
+      color: white;
+      opacity: 0.6;      
     }
     .slide-in-out-hoger {
       position: absolute;
@@ -135,6 +139,8 @@
       animation: slideInOut 22s linear forwards;
       overflow: hidden; /* Hide any overflowing text */
       z-index: 1;
+      color: white;
+      opacity: 0.6;
     } 
     .slide-in-out-vanster-2 {
       position: absolute;
@@ -146,7 +152,7 @@
       overflow: hidden; /* Hide any overflowing text */
       z-index: 1;
       color: white;
-      opacity: 0.7;
+      opacity: 0.6;
     }     
     
     @keyframes slideInOut {
@@ -469,7 +475,7 @@
           startAnimationHoger(); // Initial animation
           
           slideInOutHoger.addEventListener("animationend", function() {
-            setTimeout(startAnimationHoger, 1200); // Start the animation again after 1 seconds
+            setTimeout(startAnimationHoger, 1700); // Start the animation again after 1 seconds
           });
   
         });
@@ -529,7 +535,7 @@
       startAnimationVanster2(); // Initial animation
       
       slideInOutVanster2.addEventListener("animationend", function() {
-        setTimeout(startAnimationVanster2, 1300); // Start the animation again after 1 seconds
+        setTimeout(startAnimationVanster2, 2100); // Start the animation again after 1 seconds
       });
     });
 
