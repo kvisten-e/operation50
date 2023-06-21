@@ -324,8 +324,8 @@ document.body.insertBefore(brd, document.getElementById("board"));
 seeds = [];
 particles = [];
   
-const fwkPtcIniV = 0.5;
-const fwkPtcIniT = 2500;
+const fwkPtcIniV = 0.3;
+const fwkPtcIniT = 2000;
 const fwkSedIniT = 1000;
 const a = 0.0005;
 const g = 0.0005;
@@ -402,7 +402,7 @@ function loopFireworks() {
   var x = window.innerWidth / xArray[randomIndex];
   var y = window.innerHeight;
   newFireworkSeed(x, y);
-  setTimeout(loopFireworks, 500);
+  setTimeout(loopFireworks, 1000);
 }
 
 loopFireworks();
