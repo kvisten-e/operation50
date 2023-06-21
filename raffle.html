@@ -199,7 +199,7 @@
             top: 0px;
             left: 0px;
             animation-name: firework-fade-animation;
-            animation-timing-function: cubic-bezier(0.5, 0, 1. 1);
+            animation-timing-function: cubic-bezier(0.5, 0, 0. 0.5);
             animation-duration: 2.5s;
             z-index: 1065; 
             transform: translateZ(0)
@@ -208,12 +208,12 @@
         .fireWorkParticle {
             z-index: 999;
             position: absolute;
-            height: 5px;
-            width: 5px;
+            height: 2.5px;
+            width: 2.5px;
             border-radius: 2.5px;
             animation-name: firework-animation;
             animation-timing-function: linear;
-            animation-duration: 1s;
+            animation-duration: 3s;
             animation-iteration-count: infinite;
             z-index: 1065; 
             transform: translateZ(0)
@@ -222,12 +222,12 @@
         .fireWorkSeed {
             z-index: 999;
             position: absolute;
-            height: 5px;
-            width: 5px;
+            height: 2.5px;
+            width: 2.5px;
             border-radius: 5px;
             animation-name: firework-seed-animation;
             animation-timing-function: linear;
-            animation-duration: 0.5s;
+            animation-duration: 3.5s;
             animation-iteration-count: infinite;
             z-index: 1065;
             transform: translateZ(0) 
@@ -314,6 +314,7 @@
     var fwkPtc;  
     var fwkSed;
     var fwkBch;
+    var id;
 //---------------------------------------------------------------------------------------
      function runFireworks() {  
 
@@ -345,19 +346,10 @@ function newFireworkParticle(x, y, angle) {
   while (angle < 0)
     angle += 360;
   fwkPtc.velocity = [];
-  if (angle > 270) {
-    fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-    fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-  } else if (angle > 180) {
-    fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-    fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-  } else if (angle > 90) {
-    fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-    fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-  } else {
-    fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-    fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-  }
+
+  fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
+  fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
+  
   fwkPtc.position = [];
   fwkPtc.position.x = x;
   fwkPtc.position.y = y;
@@ -411,7 +403,7 @@ function loopFireworks() {
 loopFireworks();
   
 var before = Date.now();
-var id = setInterval(frame, 5);
+id = setInterval(frame, 5);
 
 function frame() {
   var current = Date.now();
@@ -496,6 +488,7 @@ return id;
         
         resetFireworks();
         brd.remove();
+        clearInterval(id);
 
         
 
