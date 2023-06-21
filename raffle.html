@@ -202,6 +202,7 @@
             animation-timing-function: cubic-bezier(0.5, 0, 1. 1);
             animation-duration: 2.5s;
             z-index: 1065; 
+            transform: translateZ(0)
         }
 
         .fireWorkParticle {
@@ -215,6 +216,7 @@
             animation-duration: 1s;
             animation-iteration-count: infinite;
             z-index: 1065; 
+            transform: translateZ(0)
         }
 
         .fireWorkSeed {
@@ -227,7 +229,8 @@
             animation-timing-function: linear;
             animation-duration: 0.5s;
             animation-iteration-count: infinite;
-            z-index: 1065; 
+            z-index: 1065;
+            transform: translateZ(0) 
         }
 
 
@@ -311,11 +314,11 @@
     var fwkPtc;  
     var fwkSed;
     var fwkBch;
-     //---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
      function runFireworks() {  
 
   function kalla(){
-  const here = 0.4 + Math.random() * 0.9;
+  const here = 0.7 + Math.random() * 0.6;
   return here;
 }  
 
@@ -455,7 +458,7 @@ function frame() {
 return id;
 }
    
-     //---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 
 
 
@@ -620,8 +623,8 @@ return id;
         borjaDiv.innerHTML = ''; // Remove the image element from the container div
       }
     
-    if (filledInPixels > 70) {
-    //if (75 > 70) {
+    //if (filledInPixels > 70) {
+    if (75 > 70) {
       document.getElementById("kontroll").style.display = "block";
       document.getElementById("kontroll").disabled = false;
     }
