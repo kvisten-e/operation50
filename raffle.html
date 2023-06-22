@@ -316,7 +316,7 @@
      function runFireworks() {  
 
   function kalla(){
-  const here = 0.7 + Math.random() * 0.6;
+  const here = 0.7 + Math.random() * 0.5;
   return here;
 }  
 
@@ -450,8 +450,8 @@ return id;
 //---------------------------------------------------------------------------------------
 
 
-      //var count = 15;
-      var count = 1;
+      var count = 15;
+      //var count = 1;
       countdown.innerHTML = count;
     
       // Variable to hold the interval ID for fireworks
@@ -613,8 +613,8 @@ return id;
         borjaDiv.innerHTML = ''; // Remove the image element from the container div
       }
     
-    //if (filledInPixels > 70) {
-    if (75 > 70) {
+    if (filledInPixels > 70) {
+    //if (75 > 70) {
       document.getElementById("kontroll").style.display = "block";
       document.getElementById("kontroll").disabled = false;
     }
