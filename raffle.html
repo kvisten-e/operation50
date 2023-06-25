@@ -20,7 +20,8 @@
       background-position: center;
       background-repeat: no-repeat;
       overflow: hidden;
-      position: relative;     
+      position: relative;    
+      font-family: 'Quicksand', sans-serif; 
     }
 
     .canvas {
@@ -236,7 +237,57 @@
           opacity: 0;
           background-color: transparent;
         }
+        .bild-vinst {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-top: 5%;
+          background-position: center;
+          overflow: hidden;
+          z-index: 1062;
+        }
 
+        .image-container {
+          display: flex;
+          justify-content: center;
+        }
+        .scaled-image {
+          width: 50%; /* Adjust the width as per your requirement */
+          height: auto; /* This maintains the aspect ratio */
+        }
+
+        .text-container {
+          text-align: center;
+        }
+        .text-vinst1{
+          margin-top: 15px;
+          font-size: 28px;
+          font-weight: bold;
+          color: white;
+        }
+        .text-vinst2{
+          margin-top: -10px;
+          font-size: 28px;
+          font-weight: bold;
+          color: white;
+        }
+        .text-vinst-stor{
+          margin-top: 25px;
+          font-size: 70px;
+          font-weight: bold;
+          color:rgba(255, 193, 7, 1);
+        }
+        .text-vinst-footer{
+          position: absolute;
+          bottom: 1%;
+          width: 100%;
+          text-align: center;
+          font-size: 28px;
+          font-weight: bold;
+          color: white;
+        }
 
 
   </style>
@@ -255,10 +306,20 @@
   <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" >
       <div class="modal-overlay"></div>
-      <div class="modal-content w-100" style="position: absolute; top: 5%; bottom: 5%;" >
+      <div class="modal-content w-100" style="position: absolute; top: 10%; bottom: 5%;" >
         <div class="modal-body">
-          This is the content of the popup box.
+          <div class="bild-vinst">
+            <div class="image-container">
+              <img src="media/vinstbild.png" class="scaled-image">
+            </div>
+            <div class="text-container">
+              <h1 class="text-vinst1">Von Anka</h1>
+              <h1 class="text-vinst2">Upplevelsen</h1>
+              <h1 class="text-vinst-stor">30.000kr</h1>
+            </div>
+          </div>
         </div>
+        <h1 class="text-vinst-footer">Grattis på 50 års dagen</h1>
       </div>
     </div>
   </div>
@@ -450,8 +511,8 @@ return id;
 //---------------------------------------------------------------------------------------
 
 
-      var count = 15;
-      //var count = 1;
+      //var count = 15;
+      var count = 1;
       countdown.innerHTML = count;
     
       // Variable to hold the interval ID for fireworks
@@ -545,7 +606,7 @@ return id;
     // Show the form when Image is loaded.
     document.querySelectorAll('.form')[0].style.visibility = 'visible';
   };
-  brush.src = 'media/brush-1.png'
+  brush.src = 'media/brush-2.png'
   
   
   canvas.addEventListener('mousedown', handleMouseDown, false);
@@ -613,8 +674,8 @@ return id;
         borjaDiv.innerHTML = ''; // Remove the image element from the container div
       }
     
-    if (filledInPixels > 70) {
-    //if (75 > 70) {
+    //if (filledInPixels > 70) {
+    if (75 > 70) {
       document.getElementById("kontroll").style.display = "block";
       document.getElementById("kontroll").disabled = false;
     }
@@ -636,8 +697,8 @@ return id;
         x, y;
     
     for (var i = 0; i < dist; i++) {
-      x = lastPoint.x + (Math.sin(angle) * i) - 25;
-      y = lastPoint.y + (Math.cos(angle) * i) - 25;
+      x = lastPoint.x + (Math.sin(angle) * i) - 10;
+      y = lastPoint.y + (Math.cos(angle) * i) - 10;
       ctx.globalCompositeOperation = 'destination-out';
       ctx.drawImage(brush, x, y);
     }
